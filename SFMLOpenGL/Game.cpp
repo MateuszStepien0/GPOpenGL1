@@ -87,7 +87,8 @@ void Game::update()
 	{
 		input = 0;
 	}
-	//cout << "Update up" << endl;
+	
+
 }
 
 void Game::draw()
@@ -199,37 +200,38 @@ void Game::draw()
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glLoadIdentity();
 		std::cout << "quads" << std::endl;
+		glScalef(2.0f, 2.0f, 2.0f);
 		glBegin(GL_QUADS);
 		{
 			glColor3f(0.0f, 100.0f, 0.0f);
-			glVertex3f(0.0, 2.0, -5.0);
-			glVertex3f(0.0, -2.0, -5.0);
-			glVertex3f(-2.0, -2.0, -5.0);
-			glVertex3f(-2.0, 2.0, -5.0);
+			glVertex3f(0.0, 1.0, -5.0);
+			glVertex3f(0.0, -1.0, -5.0);
+			glVertex3f(-1.0, -1.0, -5.0);
+			glVertex3f(-1.0, 1.0, -5.0);
 		}
 		break;
 	case 9:
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glLoadIdentity();
 		std::cout << "quads strip" << std::endl;
+		glRotatef(180.0f, 0.0f, 0.0f, 1.0f);
 		glBegin(GL_QUAD_STRIP);
 		{
 			glColor3f(0.0f, 100.0f, 0.0f);
-			glVertex3f(0.0, 2.0, -5.0);
-			glVertex3f(0.0, -2.0, -5.0);
-			glVertex3f(-2.0, -2.0, -5.0);
-			glVertex3f(-2.0, 2.0, -5.0);
+			glVertex3f(-0.5, 0.5, -5.0);
+			glVertex3f(0.0, 0.5, -5.0);
+			glVertex3f(-0.5, -0.5, -5.0);
+			glVertex3f(0.0, -0.5, -5.0);
 			glColor3f(100.0f, 0.0f, 0.0f);
-			glVertex3f(0.0, 2.0, -5.0);
-			glVertex3f(0.0, -2.0, -5.0);
-			glVertex3f(2.0, -2.0, -5.0);
-			glVertex3f(2.0, 2.0, -5.0);
+			glVertex3f(-0.3, -1.0, -5.0);
+			glVertex3f(0.3, -1.0, -5.0);
 		}
 		break;
 	case 0:
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glLoadIdentity();
 		std::cout << "polygon" << std::endl;
+		glTranslatef(1.0f, 0.0f, 0.0f);
 		glBegin(GL_POLYGON);
 		{
 			glColor3f(0.0f, 100.0f, 0.0f);
