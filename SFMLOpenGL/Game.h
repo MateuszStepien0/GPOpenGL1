@@ -23,15 +23,11 @@ private:
 
 	int input;
 	
+	const int primatives;
 
-	// // Uncomment for Part 2
-	// // ********************
-	// const int primatives;
+	GLuint index;
+	Clock clock;
+	Time elapsed{ sf::seconds(0) };
 
-	//GLuint index;
-	//Clock clock;
-	//Time elapsed;
-
-	//float rotationAngle = 0.0f;
-	// // ********************
+	float rotationAngle = 0.0f;
 };

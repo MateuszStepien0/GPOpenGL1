@@ -10,12 +10,4 @@
   C:\SFML-2.5.0\bin\sfml-window-2.dll
   C:\SFML-2.5.0\bin\sfml-window-d-2.dll
   11 File(s) copied
-  Game.cpp
-c:\users\nat\desktop\gpopengl1\sfmlopengl\game.cpp(226): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-c:\users\nat\desktop\gpopengl1\sfmlopengl\game.cpp(227): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-c:\users\nat\desktop\gpopengl1\sfmlopengl\game.cpp(238): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-c:\users\nat\desktop\gpopengl1\sfmlopengl\game.cpp(239): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-c:\users\nat\desktop\gpopengl1\sfmlopengl\game.cpp(240): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-c:\users\nat\desktop\gpopengl1\sfmlopengl\game.cpp(241): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-c:\users\nat\desktop\gpopengl1\sfmlopengl\game.cpp(242): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-  SFMLOpenGL.vcxproj -> C:\Users\nat\Desktop\GPOpenGL1\Debug\SFMLOpenGL.exe
+  SFMLOpenGL.vcxproj -> C:\Users\c00230799\Desktop\GPOpenGL1\Debug\SFMLOpenGL.exe

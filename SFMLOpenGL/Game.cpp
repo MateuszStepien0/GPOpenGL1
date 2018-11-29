@@ -1,7 +1,11 @@
 #include <Game.h>
 
-Game::Game() : window(VideoMode(800, 600), "OpenGL")
+bool flip = false;
+int current = 1;
+
+Game::Game() : window(VideoMode(800, 600), "OpenGL"), primatives(10)
 {
+	index = glGenLists(primatives);
 }
 
 Game::~Game() {}
@@ -32,12 +36,146 @@ void Game::run()
 
 void Game::initialize()
 {
-	glClearColor(0.0f, 0.0f, 0.0f, 0.0f); 
-	glMatrixMode(GL_PROJECTION); 
-	glLoadIdentity(); 
+	isRunning = true;
+
+	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
 	gluPerspective(45.0, window.getSize().x / window.getSize().y, 1.0, 500.0);
 	glMatrixMode(GL_MODELVIEW);
-	isRunning = true;
+
+	glNewList(index, GL_COMPILE);
+	glBegin(GL_POINTS);
+	{
+		glColor3f(0.0f, 100.0f, 0.0f);
+		glVertex3f(0.0, 1.0, -5.0);
+		glVertex3f(-1.0, -1.0, -5.0);
+		glVertex3f(1.0, -1.0, -5.0);
+	}
+	glEnd();
+	glEndList();
+
+	glNewList(index + 1, GL_COMPILE);
+	glBegin(GL_LINES);
+	{
+		glColor3f(0.0f, 100.0f, 0.0f);
+		glVertex3f(-0.25, 1.0, -5.0);
+		glVertex3f(-1.0, -0.5, -5.0);
+		glVertex3f(-1.0, -1.0, -5.0);
+		glVertex3f(1.0, -1.0, -5.0);
+		glVertex3f(1.0, -0.5, -5.0);
+		glVertex3f(0.25, 1.0, -5.0);
+	}
+	glEnd();
+	glEndList();
+
+	glNewList(index + 2, GL_COMPILE);
+	glBegin(GL_LINE_STRIP);
+	{
+		glColor3f(0.0f, 100.0f, 0.0f);
+		glVertex3f(-0.25, 1.0, -5.0);
+		glVertex3f(-1.0, -0.5, -5.0);
+		glVertex3f(-1.0, -1.0, -5.0);
+		glVertex3f(1.0, -1.0, -5.0);
+		glVertex3f(1.0, -0.5, -5.0);
+		glVertex3f(0.25, 1.0, -5.0);
+	}
+	glEnd();
+	glEndList();
+
+	glNewList(index + 3, GL_COMPILE);
+	glBegin(GL_LINE_LOOP);
+	{
+		glColor3f(0.0f, 100.0f, 0.0f);
+		glVertex3f(-0.25, 1.0, -5.0);
+		glVertex3f(-1.0, -0.5, -5.0);
+		glVertex3f(-1.0, -1.0, -5.0);
+		glVertex3f(1.0, -1.0, -5.0);
+		glVertex3f(1.0, -0.5, -5.0);
+		glVertex3f(0.25, 1.0, -5.0);
+	}
+	glEnd();
+	glEndList();
+
+	glNewList(index + 4, GL_COMPILE);
+	glBegin(GL_TRIANGLES);
+	{
+		glColor3f(0.0f, 100.0f, 0.0f);
+		glVertex3f(0.0, 1.0, -5.0);
+		glVertex3f(-1.0, -1.0, -5.0);
+		glVertex3f(1.0, -1.0, -5.0);
+	}
+	glEnd();
+	glEndList();
+
+	glNewList(index + 5, GL_COMPILE);
+	glBegin(GL_TRIANGLE_STRIP);
+	{
+		glColor3f(0.0f, 100.0f, 0.0f);
+		glVertex3f(-2.0, 1.0, -5.0);
+		glVertex3f(-1.0, -0.0, -5.0);
+		glVertex3f(-2.0, -1.0, -5.0);
+		glColor3f(100.0f, 100.0f, 0.0f);
+		glVertex3f(0.0, -1.0, -5.0);
+		glVertex3f(-1.0, -0.0, -5.0);
+		glVertex3f(-2.0, -1.0, -5.0);
+	}
+	glEnd();
+	glEndList();
+
+	glNewList(index + 6, GL_COMPILE);
+	glBegin(GL_TRIANGLE_FAN);
+	{
+		glColor3f(100.0f, 0.0f, 0.0f);
+		glVertex3f(-2.0, 1.0, -5.0);
+		glVertex3f(-1.0, -0.0, -5.0);
+		glVertex3f(-2.0, -1.0, -5.0);
+		glVertex3f(0.0, -1.0, -5.0);
+		glVertex3f(-1.0, -0.0, -5.0);
+		glVertex3f(-2.0, -1.0, -5.0);
+	}
+	glEnd();
+	glEndList();
+
+	glNewList(index + 7, GL_COMPILE);
+	glBegin(GL_QUADS);
+	{
+		glColor3f(0.0f, 100.0f, 0.0f);
+		glVertex3f(0.0, 1.0, -5.0);
+		glVertex3f(0.0, -1.0, -5.0);
+		glVertex3f(-1.0, -1.0, -5.0);
+		glVertex3f(-1.0, 1.0, -5.0);
+	}
+	glEnd();
+	glEndList();
+
+	glNewList(index + 8, GL_COMPILE);
+	glBegin(GL_QUAD_STRIP);
+	{
+		glColor3f(0.0f, 100.0f, 0.0f);
+		glVertex3f(-1.0, 1.0, -5.0);
+		glVertex3f(0.0, 1.0, -5.0);
+		glVertex3f(-1.0, -1.0, -5.0);
+		glVertex3f(0.0, -1.0, -5.0);
+		glColor3f(100.0f, 0.0f, 0.0f);
+		glVertex3f(-0.3, -1.0, -5.0);
+		glVertex3f(0.3, -1.0, -5.0);
+	}
+	glEnd();
+	glEndList();
+
+	glNewList(index + 9, GL_COMPILE);
+	glBegin(GL_POLYGON);
+	{
+		glColor3f(0.0f, 100.0f, 0.0f);
+		glVertex3f(0.0, 0.9, -5.0);
+		glVertex3f(0.6, 0.2, -5.0);
+		glVertex3f(0.3, -0.8, -5.0);
+		glVertex3f(-0.3, -0.8, -5.0);
+		glVertex3f(-0.6, 0.2, -5.0);
+	}
+	glEnd();
+	glEndList();
 }
 
 void Game::update()
@@ -47,203 +185,46 @@ void Game::update()
 		isRunning = false;
 	}
 	
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
+	elapsed = clock.getElapsedTime();
+
+	if (elapsed.asSeconds() >= 1.0f)
 	{
-		input = 1;
+		clock.restart();
+
+		if (!flip)
+		{
+			flip = true;
+			current++;
+			if (current > primatives)
+			{
+				current = 1;
+			}
+		}
+		else
+		{
+			flip = false;
+		}
 	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+
+	if (flip)
 	{
-		input = 2;
+		rotationAngle += 0.005f;
+
+		if (rotationAngle > 360.0f)
+		{
+			rotationAngle -= 360.0f;
+		}
 	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::E))
-	{
-		input = 3;
-	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::R))
-	{
-		input = 4;
-	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::T))
-	{
-		input = 5;
-	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Y))
-	{
-		input = 6;
-	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::U))
-	{
-		input = 7;
-	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::I))
-	{
-		input = 8;
-	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::O))
-	{
-		input = 9;
-	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::P))
-	{
-		input = 0;
-	}
-	
 
 }
 
 void Game::draw()
 {
-	switch (input)
-	{
-	case 1:
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);	
-		glLoadIdentity();
-		std::cout << "points" << std::endl;
-		glBegin(GL_POINTS);
-		{
-			glColor3f(0.0f, 100.0f, 0.0f);
-			glVertex3f(0.0, 2.0, -5.0);
-			glVertex3f(-2.0, -2.0, -5.0);
-			glVertex3f(2.0, -2.0, -5.0);
-		}
-		break;
-	case 2:
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		glLoadIdentity();
-		std::cout << "lines" << std::endl;
-		glBegin(GL_LINES);
-		{
-			glColor3f(0.0f, 100.0f, 0.0f);
-			glVertex3f(-0.5, 2.0, -5.0);
-			glVertex3f(-2.0, -1.0, -5.0);
-			glVertex3f(-2.0, -2.0, -5.0);
-			glVertex3f(2.0, -2.0, -5.0);
-			glVertex3f(2.0, -1.0, -5.0);
-			glVertex3f(0.5, 2.0, -5.0);
-		}
-		break;
-	case 3:
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		glLoadIdentity();
-		std::cout << "line strip" << std::endl;
-		glBegin(GL_LINE_STRIP);
-		{
-			glColor3f(0.0f, 100.0f, 0.0f);
-			glVertex3f(-0.5, 2.0, -5.0);
-			glVertex3f(-2.0, -1.0, -5.0);
-			glVertex3f(-2.0, -2.0, -5.0);
-			glVertex3f(2.0, -2.0, -5.0);
-			glVertex3f(2.0, -1.0, -5.0);
-			glVertex3f(0.5, 2.0, -5.0);
-		}
-		break;
-	case 4:
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		glLoadIdentity();
-		std::cout << "line loop" << std::endl;
-		glBegin(GL_LINE_LOOP);
-		{
-			glColor3f(0.0f, 100.0f, 0.0f);
-			glVertex3f(-0.5, 2.0, -5.0);
-			glVertex3f(-2.0, -1.0, -5.0);
-			glVertex3f(-2.0, -2.0, -5.0);
-			glVertex3f(2.0, -2.0, -5.0);
-			glVertex3f(2.0, -1.0, -5.0);
-			glVertex3f(0.5, 2.0, -5.0);
-		}
-		break;
-	case 5:
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		glLoadIdentity();
-		std::cout << "triangles" << std::endl;
-		glBegin(GL_TRIANGLES);
-		{
-			glColor3f(0.0f, 100.0f, 0.0f);
-			glVertex3f(0.0, 2.0, -5.0);
-			glVertex3f(-2.0, -2.0, -5.0);
-			glVertex3f(2.0, -2.0, -5.0);
-		}
-		break;
-	case 6:
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		glLoadIdentity();
-		std::cout << "triangle strip" << std::endl;
-		glBegin(GL_TRIANGLE_STRIP);
-		{
-			glColor3f(0.0f, 100.0f, 0.0f);
-			glVertex3f(-2.0, 1.0, -5.0);
-			glVertex3f(-1.0, -0.0, -5.0);
-			glVertex3f(-2.0, -1.0, -5.0);
-			glColor3f(100.0f, 100.0f, 0.0f);
-			glVertex3f(0.0, -1.0, -5.0);
-			glVertex3f(-1.0, -0.0, -5.0);
-			glVertex3f(-2.0, -1.0, -5.0);
-		}
-		break;
-	case 7:
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		glLoadIdentity();
-		std::cout << "triangle fan" << std::endl;
-		glBegin(GL_TRIANGLE_FAN);
-		{
-			glColor3f(100.0f, 0.0f, 0.0f);
-			glVertex3f(-2.0, 1.0, -5.0);
-			glVertex3f(-1.0, -0.0, -5.0);
-			glVertex3f(-2.0, -1.0, -5.0);
-			glColor3f(0.0f, 100.0f, 100.0f);
-			glVertex3f(0.0, -1.0, -5.0);
-			glVertex3f(-1.0, -0.0, -5.0);
-			glVertex3f(-2.0, -1.0, -5.0);
-		}
-		break;
-	case 8:
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		glLoadIdentity();
-		std::cout << "quads" << std::endl;
-		glScalef(2.0f, 2.0f, 2.0f);
-		glBegin(GL_QUADS);
-		{
-			glColor3f(0.0f, 100.0f, 0.0f);
-			glVertex3f(0.0, 1.0, -5.0);
-			glVertex3f(0.0, -1.0, -5.0);
-			glVertex3f(-1.0, -1.0, -5.0);
-			glVertex3f(-1.0, 1.0, -5.0);
-		}
-		break;
-	case 9:
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		glLoadIdentity();
-		std::cout << "quads strip" << std::endl;
-		glRotatef(180.0f, 0.0f, 0.0f, 1.0f);
-		glBegin(GL_QUAD_STRIP);
-		{
-			glColor3f(0.0f, 100.0f, 0.0f);
-			glVertex3f(-0.5, 0.5, -5.0);
-			glVertex3f(0.0, 0.5, -5.0);
-			glVertex3f(-0.5, -0.5, -5.0);
-			glVertex3f(0.0, -0.5, -5.0);
-			glColor3f(100.0f, 0.0f, 0.0f);
-			glVertex3f(-0.3, -1.0, -5.0);
-			glVertex3f(0.3, -1.0, -5.0);
-		}
-		break;
-	case 0:
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		glLoadIdentity();
-		std::cout << "polygon" << std::endl;
-		glTranslatef(1.0f, 0.0f, 0.0f);
-		glBegin(GL_POLYGON);
-		{
-			glColor3f(0.0f, 100.0f, 0.0f);
-			glVertex3f(0.0, 0.9, -5.0);
-			glVertex3f(0.6, 0.2, -5.0);
-			glVertex3f(0.3, -0.8, -5.0);
-			glVertex3f(-0.3, -0.8, -5.0);
-			glVertex3f(-0.6, 0.2, -5.0);
-		}
-		break;
-	}
-	glEnd();
+
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+	cout << "Drawing Primative " << current << endl;
+	glCallList(current);
 	//cout << "Draw up" << endl;
 	window.display();
 }
