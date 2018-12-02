@@ -29,5 +29,13 @@ private:
 	Clock clock;
 	Time elapsed{ sf::seconds(0) };
 
+	bool rotating{ false };
 	float rotationAngle = 0.0f;
+
+	bool scaling{ false };
+	float scaleScalar = 1.0f;
+
+	bool translating{ false };
+	float translateScalarX = 0.0f;
+	float translateScalarY = 0.0f;
 };

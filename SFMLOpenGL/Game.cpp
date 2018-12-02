@@ -27,6 +27,99 @@ void Game::run()
 			{
 				isRunning = false;
 			}
+			if (event.type == Event::KeyPressed)
+			{
+				if (sf::Keyboard::Escape == event.key.code)
+				{
+					isRunning = false;
+				}
+
+				if (sf::Keyboard::A == event.key.code)
+				{
+					rotating = true;
+					rotationAngle += 0.005f;
+				}
+				if (sf::Keyboard::D == event.key.code)
+				{
+					rotating = true;
+					rotationAngle -= 0.005f;
+				}
+
+				if (sf::Keyboard::W == event.key.code)
+				{
+					scaling = true;
+					scaleScalar += 0.001f;
+				}
+				if (sf::Keyboard::S == event.key.code)
+				{
+					scaling = true;
+					scaleScalar -= 0.001f;
+				}
+
+				if (sf::Keyboard::Up == event.key.code)
+				{
+					translating = true;
+					translateScalarY += 0.001f;
+				}
+				if (sf::Keyboard::Down == event.key.code)
+				{
+					translating = true;
+					translateScalarY -= 0.001f;
+				}
+				if (sf::Keyboard::Left == event.key.code)
+				{
+					translating = true;
+					translateScalarX -= 0.001f;
+				}
+				if (sf::Keyboard::Right == event.key.code)
+				{
+					translating = true;
+					translateScalarX += 0.001f;
+				}
+			}
+			if (event.type == Event::KeyReleased)
+			{
+				if (sf::Keyboard::A == event.key.code)
+				{
+					rotating = false;
+					rotationAngle = 0.0f;
+				}
+				if (sf::Keyboard::D == event.key.code)
+				{
+					rotating = false;
+					rotationAngle = 0.0f;
+				}
+				if (sf::Keyboard::W == event.key.code)
+				{
+					scaling = false;
+					scaleScalar = 1.0f;
+				}
+				if (sf::Keyboard::S == event.key.code)
+				{
+					scaling = false;
+					scaleScalar = 1.0f;
+				}
+				if (sf::Keyboard::Up == event.key.code)
+				{
+					translating = false;
+					translateScalarY = 0.0f;
+				}
+				if (sf::Keyboard::Down == event.key.code)
+				{
+					translating = false;
+					translateScalarY = 0.0f;
+				}
+				if (sf::Keyboard::Left == event.key.code)
+				{
+					translating = false;
+					translateScalarX = 0.0f;
+				}
+				if (sf::Keyboard::Right == event.key.code)
+				{
+					translating = false;
+					translateScalarX = 0.0f;
+				}
+			}
 		}
 		update();
 		draw();
@@ -180,11 +273,21 @@ void Game::initialize()
 
 void Game::update()
 {
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+	if (rotating)
 	{
-		isRunning = false;
+		glRotatef(rotationAngle, 0.0f, 0.0f, 1.0f);
 	}
-	
+
+	if (scaling)
+	{
+		glScalef(scaleScalar, scaleScalar, 1.0f);
+	}
+
+	if (translating)
+	{
+		glTranslatef(translateScalarX, translateScalarY, 0.0f);
+	}
+
 	elapsed = clock.getElapsedTime();
 
 	if (elapsed.asSeconds() >= 1.0f)
@@ -201,9 +304,7 @@ void Game::update()
 			}
 		}
 		else
-		{
 			flip = false;
-		}
 	}
 
 	if (flip)
@@ -215,17 +316,15 @@ void Game::update()
 			rotationAngle -= 360.0f;
 		}
 	}
-
 }
 
 void Game::draw()
 {
-
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	cout << "Drawing Primative " << current << endl;
 	glCallList(current);
-	//cout << "Draw up" << endl;
+
 	window.display();
 }
 
